@@ -18,17 +18,17 @@ public class UserRepository : IUserRepository
 
     public async Task<User> GetUserById(Guid id)
     {
-        return await _session.Connection.QueryFirstAsync<User>(AuthQueries.GetUserById, new { Id = id }, _session.Transaction);
+        return await _session.Connection.QueryFirstOrDefaultAsync<User>(AuthQueries.GetUserById, new { Id = id }, _session.Transaction);
     }
 
     public async Task<User> GetUserByEmail(string email)
     {
-        return await _session.Connection.QueryFirstAsync<User>(AuthQueries.GetUserByEmail, new { Email = email }, _session.Transaction);
+        return await _session.Connection.QueryFirstOrDefaultAsync<User>(AuthQueries.GetUserByEmail, new { Email = email }, _session.Transaction);
     }
 
     public async Task<UserType> GetUserTypeById(Guid userTypeId)
     {
-        return await _session.Connection.QueryFirstAsync<UserType>(AuthQueries.GetUserTypeById, new { id = userTypeId }, _session.Transaction);
+        return await _session.Connection.QueryFirstOrDefaultAsync<UserType>(AuthQueries.GetUserTypeById, new { id = userTypeId }, _session.Transaction);
     }
 
     public async Task<List<UserRoles>> GetUserRolesByUserId(Guid userId)
